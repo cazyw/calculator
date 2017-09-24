@@ -16,41 +16,45 @@
 <body>
     <div class="container-fluid calculator">
         <div class="row">
-            <div class="col-md-12 screen">
+            <div class="col-md-12 screen" id="screen">
+                <div class="screen-big" id="screen-big">
+                </div>
+                <div class="screen-little" id="screen-little">
+                </div>
             </div>
         </div>
         <div class="row buttons">
-            <div class="col-xs-3 but">AC</div>
-            <div class="col-xs-3 but">CE</div>
-            <div class="col-xs-3 but">%</div>
-            <div class="col-xs-3 but">x</div>
+            <div class="col-xs-3 but" id="C">C</div>
+            <div class="col-xs-3 but" id="DEL">DEL</div>
+            <div class="col-xs-3 but" id="div">%</div>
+            <div class="col-xs-3 but" id="mul">x</div>
         </div>
         <div class="row buttons">
-            <div class="col-xs-3 but">7</div>
-            <div class="col-xs-3 but">8</div>
-            <div class="col-xs-3 but">9</div>
-            <div class="col-xs-3 but">-</div>
+            <div class="col-xs-3 but" id="seven">7</div>
+            <div class="col-xs-3 but" id="eight">8</div>
+            <div class="col-xs-3 but" id="nine">9</div>
+            <div class="col-xs-3 but" id="minus">-</div>
         </div>
         <div class="row buttons">
-            <div class="col-xs-3 but">4</div>
-            <div class="col-xs-3 but">5</div>
-            <div class="col-xs-3 but">6</div>
-            <div class="col-xs-3 but">+</div>
+            <div class="col-xs-3 but" id="four">4</div>
+            <div class="col-xs-3 but" id="five">5</div>
+            <div class="col-xs-3 but" id="six">6</div>
+            <div class="col-xs-3 but" id="plus">+</div>
         </div>
         <div class="row buttons">
             <div class="col-xs-9 multi">
                 <div class="row dub1">
-                    <div class="col-xs-4 but">1</div>
-                    <div class="col-xs-4 but">2</div>
-                    <div class="col-xs-4 but">3</div>
+                    <div class="col-xs-4 but" id="one">1</div>
+                    <div class="col-xs-4 but" id="two">2</div>
+                    <div class="col-xs-4 but" id="three">3</div>
                 </div>
                 <div class="row dub2">
-                    <div class="col-xs-9 but but2">0</div>
-                    <div class="col-xs-3 but">.</div>
+                    <div class="col-xs-9 but but2" id="zero">0</div>
+                    <div class="col-xs-3 but" id="dot">.</div>
                 </div>
             </div>
             <div class="col-xs-3 multi">
-                <div class="col-xs-3 but but3">=</div>
+                <div class="col-xs-3 but but3" id="equals">=</div>
             </div>
         </div>
     </div>

@@ -11,7 +11,35 @@
     height: 50px;
     margin: 20px 20px;
     border: 1px solid black;
+    padding: 0;
 }
+
+.screen-big {
+    background-color: #ECCA73;
+    height: 30px;
+    width: 100%;
+    margin: 0;
+    padding: 0px 10px;
+    line-height: 20px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.screen-little {
+    background-color: #ECD873;
+    height: 20px;
+    width: 100%;
+    margin: 0;
+    padding: 0px 10px;
+    line-height: 20px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
 
 .buttons {
     display: flex;
@@ -26,6 +54,12 @@
     padding: auto auto;
     display: flex;
     align-items: center;
+    background-color: grey;
+    border-radius: 5px;
+}
+
+.but:active {
+    background-color: #005580;
 }
 
 .but2 {
