@@ -26,6 +26,15 @@ $(document).ready(function() {
             commands.push(entry);
             sym = false;
         }
+        else if (entry === ".") {
+            console.log(entry);
+            total = 0;
+            commands = [];
+            calc = "";
+            temp_n = 0;
+            printScreen();
+            sym = false;
+        }
         else if (entry === "C") {
             console.log(entry);
             total = 0;
@@ -65,6 +74,10 @@ $(document).ready(function() {
                 $("#screen-big").text(total);
                 $("#screen-little").text(commands.join(""));
                 calc = entry;
+                if ($(e.target).attr('id') === "div") {
+                    console.log("divide!");
+                    calc = "/";
+                }
                 temp_n = 0;
                 // total += parseInt(temp_n);
                 
@@ -86,7 +99,7 @@ $(document).ready(function() {
                 temp_n = 0;
                 calc = entry;
             }
-            else if (calc === "%") {
+            else if (calc === "/") {
                 calc = "/";
                 commands.push(entry);
                 total /= parseInt(temp_n);
