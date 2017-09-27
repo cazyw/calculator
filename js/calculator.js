@@ -1,6 +1,6 @@
 let total = 0; // current total 
 let commands = []; // commands entered
-let calc = ""; // operator
+let calc = ""; // last operator
 let temp_n = 0; // current number
 let sym = false; // operator vs digit entered to catch if operator entered multiple times
 let frac = 0; // number is a float "." entered
@@ -70,7 +70,14 @@ const operatorEntered = (entry) => {
         updateVal(entry);
     }
     else if (calc === "/") {
-        total /= parseFloat(temp_n);
+        if (total % parseFloat(temp_n) !== 0){
+            total /= parseFloat(temp_n);
+            total = parseFloat(total.toFixed(2));
+        }
+        else {
+            total /= parseFloat(temp_n);
+        }
+        console.log(total);
         updateVal(entry);
     }
     else if (calc === "x") {
