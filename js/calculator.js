@@ -26,6 +26,8 @@ const clearVal = () => {
     commands = [];
     calc = "";
     temp_n = 0;
+    sym = false;
+    frac = 0;
 }
 
 const updateVal = (val) => {
@@ -77,7 +79,6 @@ const operatorEntered = (entry) => {
         else {
             total /= parseFloat(temp_n);
         }
-        console.log(total);
         updateVal(entry);
     }
     else if (calc === "x") {
@@ -99,8 +100,9 @@ const operatorEntered = (entry) => {
 
 const calculate = (entry) => {
     if(entry.match(/^[0-9]+$/)){
+        
         if (frac > 0){
-            temp_n += parseFloat(entry) * Math.pow(10, -frac);
+            temp_n = parseFloat((parseFloat(temp_n) + (parseFloat(entry) * Math.pow(10, -frac))).toFixed(frac));
             frac++;
         }
         else {
