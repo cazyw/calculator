@@ -1,19 +1,24 @@
-let total = 0; // current total 
-let commands = []; // commands entered
-let calc = ""; // last operator
-let temp_n = 0; // current number
-let sym = false; // operator vs digit entered to catch if operator entered multiple times
-let frac = 0; // number is a float "." entered
+let commands = [];
+
+const operators = {
+    '+': function (a, b) { return a + b },
+    '-': function (a, b) { return a - b },
+    '/': function (a, b) { return a / b },
+    'x': function (a, b) { return a * b }
+ }
 
 const printScreen = (big, small) => {
-    if(small.length > 35 || big.toString().length > 14){
+    if(small.length > 30 || big.toString().length > 14){
         commands = ["Max digits reached"];
         $("#screen-little").text("Max digits reached");
-        clearVal();
+        commands = [];
         setTimeout( function(){ 
             $("#screen-big").text("");
             $("#screen-little").text("");
           }, 2000 );
+    }
+    else if (big === "hold"){
+        $("#screen-little").text(small);
     }
     else {
         $("#screen-big").text(big);
@@ -21,127 +26,73 @@ const printScreen = (big, small) => {
     }
 }
 
-const clearVal = () => {
-    total = 0;
-    commands = [];
-    calc = "";
-    temp_n = 0;
-    sym = false;
-    frac = 0;
-}
-
-const updateVal = (val) => {
-    commands.push(temp_n);
-    if(val !== "="){
-        commands.push(val);
-    }
-    printScreen(total, commands.join(" "));
-    temp_n = 0;
-    calc = val;
-}
-
-const updateFlags = (f, s) => {
-    frac = f;
-    sym = s;
-}
-
-const operatorEntered = (entry) => {
-    // to catch if the previous entry was an operator
-    if (sym){
-        calc = entry;
-        commands.pop();
-        commands.push(entry);
-        printScreen(total, commands.join(" "));
-    }
-    else if (calc === "DEL") {
-        calc = entry;
-        commands.push(entry);
-        printScreen(total, commands.join(" "));
-    }
-    else if (calc === "") {
-        total = temp_n;
-        printScreen(total, commands.join(" "));
-        updateVal(entry);
-    }
-    else if (calc === "+") {
-        total += parseFloat(temp_n);
-        updateVal(entry);
-    }
-    else if (calc === "-") {
-        total -= parseFloat(temp_n);
-        updateVal(entry);
-    }
-    else if (calc === "/") {
-        if (total % parseFloat(temp_n) !== 0){
-            total /= parseFloat(temp_n);
-            total = parseFloat(total.toFixed(2));
-        }
-        else {
-            total /= parseFloat(temp_n);
-        }
-        updateVal(entry);
-    }
-    else if (calc === "x") {
-        total *= parseFloat(temp_n);
-        updateVal(entry);
-    }
-
-    if (entry === "=") {
-        if (!(commands[commands.length-1] === "=")){
-            commands.push("=");
-        }
-        commands.push(total);
-        printScreen(total, commands.join(" "));
-        clearVal();
-    }
-    
-    updateFlags(0, true);
-}
-
 const calculate = (entry) => {
-    if(entry.match(/^[0-9]+$/)){
+    if(/[0-9]$/.test(entry)){
+        if (/[0-9\.]+/.test(commands[commands.length - 1])){
+            let x = commands.pop();
+            entry = x + entry;
+        }
+        commands.push(entry);
+        printScreen(entry, commands.join(" "));
+    }
+    else if(entry === "."){
+        if (/[0-9]+/.test(commands[commands.length - 1]) && commands[commands.length - 1].indexOf(".") === -1){
+            let x = commands.pop();
+            entry = x + entry;
+            commands.push(entry);
+            printScreen(entry, commands.join(" "));
+        }
         
-        if (frac > 0){
-            temp_n = parseFloat((parseFloat(temp_n) + (parseFloat(entry) * Math.pow(10, -frac))).toFixed(frac));
-            frac++;
+    }
+    else if(entry === "DEL") {
+        if (/[0-9\.]+/.test(commands[commands.length - 1])){
+            let x = commands.pop();
+            entry = x.slice(0,x.length - 1);
+            commands.push(entry);
+            printScreen(entry, commands.join(" "));
         }
         else {
-            temp_n *= 10;
-            temp_n += parseFloat(entry);
-        }
-        printScreen(temp_n, commands.join(" "));
-        sym = false;
-    }
-    else if (entry === ".") {
-        temp_n = parseFloat(temp_n.toFixed(1));
-        updateFlags(1, false);
-    }
-    else if (entry === "C") {
-        clearVal();
-        printScreen(total, commands.join(" "));
-        updateFlags(0, false);
-    }
-    else if (entry === "DEL") {
-        if(temp_n !== 0){
-            if (temp_n.toString().length === 1) {
-                temp_n = 0;
-            }
-            else {
-                temp_n = parseFloat(temp_n.toString().slice(0,temp_n.toString().length-1));
-            }
-            printScreen(temp_n, commands.join(" "));
-        }
-        if(sym){
             commands.pop();
-            printScreen(total, commands.join(" "));
-            calc = "DEL";
+            printScreen("hold", commands.join(" "));
         }
-        updateFlags(0, false);
+    }
+    else if(entry === "C"){
+        commands = [];
+        printScreen("", "");
     }
     else {
-        operatorEntered(entry);
+        if (commands.length > 0) {
+            let total = parseFloat(commands[0]);  
+            console.log("total: ", total);
+            if ((/[\+\-\/\x]/.test(commands[commands.length - 1]))){
+                commands.pop();
+                commands.push(entry);
+                printScreen("hold", commands.join(" "));
+            }
+            else {
+                if(commands.length > 2){
+                    console.log("reached");
+                    for(let i = 1; i <= commands.length - 1; i+=2){
+                        console.log("i:", i);
+                        total = operators[commands[i]](total, parseFloat(commands[i+1]));
+                        if (total.toString().length > 13){
+                            total = total.toString().slice(0,14);
+                        }
+                        console.log(total);
+                        printScreen(total, commands.join(" "));
+                    }
+                }
+                commands.push(entry);
+                printScreen("hold", commands.join(" "));
+            }
+            if (entry === "="){
+                commands = [];
+            }
+        }           
+
     }
-} 
+    console.log(commands);
+}
 
 $(document).ready(function() {
     $(".but").on("click", e => {
