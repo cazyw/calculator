@@ -1,4 +1,5 @@
 let commands = [];
+let calcOn = false;
 
 const operators = {
     '+': function (a, b) { return a + b },
@@ -7,15 +8,18 @@ const operators = {
     'x': function (a, b) { return a * b }
  }
 
+const clearScreen = () => {
+    commands = [];
+    setTimeout( function(){ 
+        $("#screen-big").text("");
+        $("#screen-little").text("");
+    }, 1000);
+}
+
 const printScreen = (big, small) => {
     if(small.length > 30 || big.toString().length > 14){
-        commands = ["Max digits reached"];
         $("#screen-little").text("Max digits reached");
-        commands = [];
-        setTimeout( function(){ 
-            $("#screen-big").text("");
-            $("#screen-little").text("");
-          }, 2000 );
+        clearScreen();
     }
     else if (big === "hold"){
         $("#screen-little").text(small);
@@ -26,7 +30,20 @@ const printScreen = (big, small) => {
     }
 }
 
-const calculate = (entry) => {
+const calcSwitch = () => {
+    $("#AC").toggleClass("off");
+    $("#screen").toggleClass("off");
+    if ($("#AC").hasClass("off")){
+        printScreen("Goodbye", "");
+        calcOn = false;
+    } else {
+        printScreen("Welcome", "");
+        calcOn = true;
+    }
+    clearScreen();
+}
+
+const calcDigits = (entry) => {
     if(/[0-9]$/.test(entry)){
         if (/[0-9\.]+/.test(commands[commands.length - 1])){
             let x = commands.pop();
@@ -38,60 +55,85 @@ const calculate = (entry) => {
     else if(entry === "."){
         if (/[0-9]+/.test(commands[commands.length - 1]) && commands[commands.length - 1].indexOf(".") === -1){
             let x = commands.pop();
-            entry = x + entry;
-            commands.push(entry);
-            printScreen(entry, commands.join(" "));
+            commands.push(x + entry);
+            printScreen(x + entry, commands.join(" "));
         }
         
     }
-    else if(entry === "DEL") {
-        if (/[0-9\.]+/.test(commands[commands.length - 1])){
+    else if(entry === "plusneg"){
+        if (/[0-9]+/.test(commands[commands.length - 1])){
             let x = commands.pop();
-            entry = x.slice(0,x.length - 1);
+            if (/^\-/.test(x)){
+                entry = x.slice(1, x.length);
+            } 
+            else {
+                entry = "-" + x;
+            }
             commands.push(entry);
             printScreen(entry, commands.join(" "));
         }
-        else {
+    }
+}
+
+const calcOperators = (entry) => {
+    if (commands.length > 0) {
+        let total = parseFloat(commands[0]);  
+        if ((/^[\+\-\/\x]$/.test(commands[commands.length - 1]))){
             commands.pop();
+            commands.push(entry);
             printScreen("hold", commands.join(" "));
         }
-    }
-    else if(entry === "C"){
-        commands = [];
-        printScreen("", "");
+        else {
+            if(commands.length > 2){
+                for(let i = 1; i <= commands.length - 1; i+=2){
+                    total = operators[commands[i]](total, parseFloat(commands[i+1]));
+                    if (total.toString().length > 13){
+                        total = total.toString().slice(0,14);
+                    }
+                    printScreen(total, commands.join(" "));
+                }
+            }
+            commands.push(entry);
+            printScreen("hold", commands.join(" "));
+        }
+        if (entry === "="){
+            commands = [];
+        }
+    }          
+}
+
+const calculate = (entry) => {
+    if (entry === "AC") {
+        calcSwitch();
     }
     else {
-        if (commands.length > 0) {
-            let total = parseFloat(commands[0]);  
-            console.log("total: ", total);
-            if ((/[\+\-\/\x]/.test(commands[commands.length - 1]))){
-                commands.pop();
-                commands.push(entry);
-                printScreen("hold", commands.join(" "));
+        if (calcOn){
+            if(/([0-9]|\.|plusneg)$/.test(entry)){
+                calcDigits(entry);                
             }
-            else {
-                if(commands.length > 2){
-                    console.log("reached");
-                    for(let i = 1; i <= commands.length - 1; i+=2){
-                        console.log("i:", i);
-                        total = operators[commands[i]](total, parseFloat(commands[i+1]));
-                        if (total.toString().length > 13){
-                            total = total.toString().slice(0,14);
-                        }
-                        console.log(total);
-                        printScreen(total, commands.join(" "));
-                    }
-                }
-                commands.push(entry);
-                printScreen("hold", commands.join(" "));
-            }
-            if (entry === "="){
+            else if(entry === "C"){
                 commands = [];
+                printScreen("0", "");
             }
-        }           
-
+            else if(entry === "DEL") {
+                if (/[0-9]+/.test(commands[commands.length - 1])){
+                    let x = commands.pop();
+                    x = x.slice(0,x.length - 1);
+                    commands.push(x);
+                    printScreen(x, commands.join(" "));
+                }
+                else {
+                    commands.pop();
+                    printScreen("hold", commands.join(" "));
+                }
+            }
+            
+            else {
+                calcOperators(entry); 
+        
+            }
+        }
     }
-    console.log(commands);
 }
 
 $(document).ready(function() {
@@ -100,7 +142,9 @@ $(document).ready(function() {
         if ($(e.target).attr('id') === "div") {
             entry = "/";
         }
+        else if ($(e.target).attr('id') === "plusneg") {
+            entry = "plusneg";
+        }
         calculate(entry);
-        
     });
 });
