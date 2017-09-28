@@ -43,17 +43,20 @@ const calcSwitch = () => {
     clearScreen();
 }
 
+const isDigits = () => {
+    return /[0-9]+/.test(commands[commands.length - 1]);
+}
+
 const calcDigits = (entry) => {
     if(/[0-9]$/.test(entry)){
         if (/[0-9\.]+/.test(commands[commands.length - 1])){
-            let x = commands.pop();
-            entry = x + entry;
+            entry = commands.pop() + entry;
         }
         commands.push(entry);
         printScreen(entry, commands.join(" "));
     }
     else if(entry === "."){
-        if (/[0-9]+/.test(commands[commands.length - 1]) && commands[commands.length - 1].indexOf(".") === -1){
+        if (isDigits() && commands[commands.length - 1].indexOf(".") === -1){
             let x = commands.pop();
             commands.push(x + entry);
             printScreen(x + entry, commands.join(" "));
@@ -61,7 +64,7 @@ const calcDigits = (entry) => {
         
     }
     else if(entry === "plusneg"){
-        if (/[0-9]+/.test(commands[commands.length - 1])){
+        if (isDigits()){
             let x = commands.pop();
             if (/^\-/.test(x)){
                 entry = x.slice(1, x.length);
