@@ -1,18 +1,21 @@
 body {
     font-family: 'Orbitron', sans-serif;
-    
+    height: 100%;
+    background: url('../img/maths.jpg');
+    background-size: cover;
 }
 
 .calculator {
     margin-top: 20px;
     height: 420px;
     width: 300px;
-    border: 1px solid #A9ACAE;
+    border: 1px solid rgb(169, 172, 174);
     border-radius: 5px;
-    background-color: #A9ACAE;
+    background-color: rgb(169, 172, 174);
     background: url('../img/metal.jpg');
     background-size: cover;
-    box-shadow: 0px 5px 10px rgb(34, 33, 33);
+    /* box-shadow: 0px 5px 10px rgb(34, 33, 33); */
+    box-shadow: inset 0px 0px 20px 10px rgba(34, 33, 33, 0.2), 5px 10px 20px rgb(34, 33, 33);
 }
 
 .heading {
