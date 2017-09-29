@@ -9,12 +9,11 @@ body {
     margin-top: 20px;
     height: 420px;
     width: 300px;
-    border: 1px solid rgb(169, 172, 174);
+    border: 1px solid rgb(120, 120, 120);
     border-radius: 5px;
     background-color: rgb(169, 172, 174);
     background: url('../img/metal.jpg');
     background-size: cover;
-    /* box-shadow: 0px 5px 10px rgb(34, 33, 33); */
     box-shadow: inset 0px 0px 20px 10px rgba(34, 33, 33, 0.2), 5px 10px 20px rgb(34, 33, 33);
 }
 
@@ -42,9 +41,7 @@ body {
 }
 
 .screen-big {
-    /* border-radius: 5px 5px 0px 0px; */
     height: 30px;
-    /* width: 100%; */
     margin: 0;
     padding: 0px 10px;
     line-height: 20px;
@@ -55,9 +52,7 @@ body {
 }
 
 .screen-little {
-    /* border-radius: 0px 0px 5px 5px; */
     height: 16px;
-    /* width: 100%; */
     margin: 0;
     padding: 0px 10px;
     line-height: 20px;
@@ -84,33 +79,39 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: -webkit-linear-gradient(to bottom, rgb(34, 33, 33),rgb(34, 33, 33) 80%, rgb(58, 58, 58)); /* Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(to bottom, rgb(34, 33, 33),rgb(34, 33, 33) 80%, rgb(58, 58, 58)); /* Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(to bottom, brgb(34, 33, 33),rgb(34, 33, 33) 80%, rgb(58, 58, 58)); /* Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom, rgb(34, 33, 33),rgb(34, 33, 33) 80%, rgb(58, 58, 58)); /* Standard syntax */
+    background: -webkit-linear-gradient(to bottom, rgb(34, 33, 33),rgb(34, 33, 33) 70%, rgb(58, 58, 58)); /* Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(to bottom, rgb(34, 33, 33),rgb(34, 33, 33) 70%, rgb(58, 58, 58)); /* Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(to bottom, brgb(34, 33, 33),rgb(34, 33, 33) 70%, rgb(58, 58, 58)); /* Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom, rgb(34, 33, 33),rgb(34, 33, 33) 70%, rgb(58, 58, 58)); /* Standard syntax */
     border-radius: 5px;
     box-shadow: 0 5px #000, 1px 1px 10px 1px rgb(34, 33, 33) inset;
     cursor: pointer;
 }
 
 .but:active {
-    background: -webkit-linear-gradient(to bottom, rgb(34, 33, 33),rgb(34, 33, 33) 80%, rgb(34, 33, 33)); /* Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(to bottom, rgb(34, 33, 33),rgb(34, 33, 33) 80%, rgb(34, 33, 33)); /* Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(to bottom, brgb(34, 33, 33),rgb(34, 33, 33) 80%, rgb(34, 33, 33)); /* Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom, rgb(34, 33, 33),rgb(34, 33, 33) 80%, rgb(34, 33, 33)); /* Standard syntax */
+    background: -webkit-linear-gradient(to bottom, rgb(34, 33, 33),rgb(34, 33, 33) 70%, rgb(58, 58, 58)); /* Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(to bottom, rgb(34, 33, 33),rgb(34, 33, 33) 70%, rgb(58, 58, 58)); /* Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(to bottom, brgb(34, 33, 33),rgb(34, 33, 33) 70%, rgb(58, 58, 58)); /* Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom, rgb(34, 33, 33),rgb(34, 33, 33) 70%, rgb(58, 58, 58)); /* Standard syntax */
     box-shadow: 0 2px #000;
     transform: translateY(4px);
 }
 
 div.switch {
-    border: 1px solid rgb(167, 45, 69);
-    background: rgb(167, 45, 69);
+    background: -webkit-linear-gradient(to bottom, rgb(120 , 35, 42),rgb(120, 35, 42) 70%, rgb(150, 42, 63));/* Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(to bottom, rgb(120 , 35, 42),rgb(120, 35, 42) 70%, rgb(150, 42, 63)); /* Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(to bottom, rgb(120 , 35, 42),rgb(120, 35, 42) 70%, rgb(150, 42, 63)); /* Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom, rgb(120 , 35, 42),rgb(120, 35, 42) 70%, rgb(150, 42, 63)); /* Standard syntax */
+    border: 1px solid rgb(120 , 35, 42);
     border-radius: 5px;
     box-shadow: 0 5px rgb(103, 28, 42);
 }
 div.switch:active {
-    border: 1px solid rgb(167, 45, 69);
-    background: rgb(167, 45, 69); 
+    background: -webkit-linear-gradient(to bottom, rgb(120 , 35, 42),rgb(120, 35, 42) 70%, rgb(150, 42, 63));/* Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(to bottom, rgb(120 , 35, 42),rgb(120, 35, 42) 70%, rgb(150, 42, 63)); /* Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(to bottom, rgb(120 , 35, 42),rgb(120, 35, 42) 70%, rgb(150, 42, 63)); /* Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom, rgb(120 , 35, 42),rgb(120, 35, 42) 70%, rgb(150, 42, 63)); /* Standard syntax */
+    border: 1px solid rgb(120 , 35, 42);
     border-radius: 5px;
     box-shadow: 0 2px rgb(103, 28, 42);
 }
@@ -118,12 +119,9 @@ div.switch:active {
 .multi {
     margin: 0;
     padding: 0;
-    /* display: flex; */
-    /* justify-content: space-around; */
 }
 
 .multi > .row {
-    /* margin-left: 1px; */
     margin: 0;
     padding: 0px 0px 0px 3px;
     display: flex;
