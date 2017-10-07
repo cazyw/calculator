@@ -1,5 +1,5 @@
 # Calculator App
-Free Code Camp Intermediate Project - Jacascript Calculator App
+Free Code Camp Advanced Project - Jacascript Calculator App
 
 https://cazyw.github.io/calculator/
 
