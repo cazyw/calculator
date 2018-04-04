@@ -13,8 +13,50 @@
     <!-- <link href="css\bootstrap.min.css" rel="stylesheet"> -->
     <link href="css\calculator.css" rel="stylesheet">
 
+
+<script type="text/javascript">
+
+    var cookieUrl = 'https://shakespeare-sunday.herokuapp.com/api/quotes/cookie';
+
+    function callOtherDomain() {
+        $.ajax({
+            type: 'GET',
+            url: cookieUrl,
+            dataType: "json",
+            crossDomain: true,
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                //WRITE IF THEIR HAVE SOME HEADER REQUEST OR DATA
+            },
+            success: function (response) {
+                console.log(response);
+
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+        var cookieName = 'HelloWorld';
+        var cookieValue = 'Indeed!';
+        var myDate = new Date();
+        myDate.setMonth(myDate.getMonth() + 12);
+        document.cookie = cookieName + "=" + cookieValue + ";expires=" + myDate;
+    }
+
+</script>
+
+
+
+
+
+
+
 </head>
 <body>
+    <button onclick="callOtherDomain()">Test </button>
+    <div id="textDiv"></div>
     <div class="container-fluid calculator">
         <div class="row">
             <div class="col-xs-12 heading">
