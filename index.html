@@ -40,26 +40,26 @@
                 console.log('error: ' + error);
             }
         });
-        $.ajax({
-            type: 'GET',
-            url: cookieMusicUrl,
-            dataType: "json",
-            crossDomain: true,
-            xhrFields: {
-                withCredentials: true
-            },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Credentials": "true",
-            },
-            success: function (response) {
-                console.log('cookies away' + response);
+        // $.ajax({
+        //     type: 'GET',
+        //     url: cookieMusicUrl,
+        //     dataType: "json",
+        //     crossDomain: true,
+        //     xhrFields: {
+        //         withCredentials: true
+        //     },
+        //     headers: {
+        //         "Access-Control-Allow-Origin": "*",
+        //         "Access-Control-Allow-Credentials": "true",
+        //     },
+        //     success: function (response) {
+        //         console.log('cookies away' + response);
 
-            },
-            error: function (error) {
-                console.log('error: ' + error);
-            }
-        });
+        //     },
+        //     error: function (error) {
+        //         console.log('error: ' + error);
+        //     }
+        // });
         var cookieName = 'calculator-cookie';
         var cookieValue = 'onetwothreefourfive';
         var myDate = new Date();
