@@ -28,7 +28,8 @@
                 withCredentials: true
             },
             headers: {
-                //WRITE IF THEIR HAVE SOME HEADER REQUEST OR DATA
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Credentials": "true",
             },
             success: function (response) {
                 console.log(response);
