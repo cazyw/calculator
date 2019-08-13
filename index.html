@@ -1,137 +1,74 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    
+
     <title>Calculator App</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Orbitron:400,700,900n" rel="stylesheet">
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Orbitron:400,700,900n" rel="stylesheet" />
     <!-- <link href="css\bootstrap.min.css" rel="stylesheet"> -->
-    <link href="css\calculator.css" rel="stylesheet">
-
-
-<script type="text/javascript">
-
-    var cookieQuotesUrl = 'https://shakespeare-sunday.herokuapp.com/api/quotes/cookie';
-    var cookieMusicUrl = 'https://spotify-playlist-backup.herokuapp.com/setcookie';
-
-    function callOtherDomain() {
-        $.ajax({
-            type: 'GET',
-            url: cookieQuotesUrl,
-            dataType: "json",
-            crossDomain: true,
-            xhrFields: {
-                withCredentials: true
-            },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Credentials": "true",
-            },
-            success: function (response) {
-                console.log('cookies away' + response);
-
-            },
-            error: function(error){
-                console.log('error: ' + error);
-            }
-        });
-        // $.ajax({
-        //     type: 'GET',
-        //     url: cookieMusicUrl,
-        //     dataType: "json",
-        //     crossDomain: true,
-        //     xhrFields: {
-        //         withCredentials: true
-        //     },
-        //     headers: {
-        //         "Access-Control-Allow-Origin": "*",
-        //         "Access-Control-Allow-Credentials": "true",
-        //     },
-        //     success: function (response) {
-        //         console.log('cookies away' + response);
-
-        //     },
-        //     error: function (error) {
-        //         console.log('error: ' + error);
-        //     }
-        // });
-        var cookieName = 'calculator-cookie';
-        var cookieValue = 'onetwothreefourfive';
-        var myDate = new Date();
-        myDate.setMonth(myDate.getMonth() + 1);
-        document.cookie = cookieName + "=" + cookieValue + ";expires=" + myDate;
-    }
-
-</script>
-
-
-
-
-
-
-
-</head>
-<body>
-    <button onclick="callOtherDomain()">Test </button>
+    <link href="css\calculator.css" rel="stylesheet" />
+  </head>
+  <body>
     <div id="textDiv"></div>
     <div class="container-fluid calculator">
-        <div class="row">
-            <div class="col-xs-12 heading">
-                Calculator
-            </div>
+      <div class="row">
+        <div class="col-xs-12 heading">
+          Calculator
         </div>
-        <div class="row">
-            <div class="col-xs-12 screen off" id="screen">
-                <div class="screen-big" id="screen-big">
-                </div>
-                <div class="screen-little" id="screen-little">
-                </div>
-            </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 screen off" id="screen">
+          <div class="screen-big" id="screen-big"></div>
+          <div class="screen-little" id="screen-little"></div>
         </div>
-        <div class="row buttons">
-            <div class="col-xs-3 but switch off" id="AC">AC</div>
-            <div class="col-xs-3 but" id="C">C</div>
-            <div class="col-xs-3 but" id="DEL">DEL</div>
-            <div class="col-xs-3 but" id="div">&divide;</div>
-        </div>
-        <div class="row buttons">
-            <div class="col-xs-3 but" id="seven">7</div>
-            <div class="col-xs-3 but" id="eight">8</div>
-            <div class="col-xs-3 but" id="nine">9</div>
-            <div class="col-xs-3 but" id="mul">x</div>
-        </div>
-        <div class="row buttons">
-            <div class="col-xs-3 but" id="four">4</div>
-            <div class="col-xs-3 but" id="five">5</div>
-            <div class="col-xs-3 but" id="six">6</div>
-            <div class="col-xs-3 but" id="minus">-</div>
-        </div>
-        <div class="row buttons">
-            <div class="col-xs-4 but" id="one">1</div>
-            <div class="col-xs-4 but" id="two">2</div>
-            <div class="col-xs-4 but" id="three">3</div>
-            <div class="col-xs-3 but" id="plus">+</div>
-        </div>
-        <div class="row buttons">
-            <div class="col-xs-4 but" id="plusneg">&plusmn;</div>
-            <div class="col-xs-9 but" id="zero">0</div>
-            <div class="col-xs-3 but" id="dot">.</div>
-            <div class="col-xs-3 but" id="plus">=</div>
-        </div>
+      </div>
+      <div class="row buttons">
+        <div class="col-xs-3 but switch off" id="AC">AC</div>
+        <div class="col-xs-3 but" id="C">C</div>
+        <div class="col-xs-3 but" id="DEL">DEL</div>
+        <div class="col-xs-3 but" id="div">&divide;</div>
+      </div>
+      <div class="row buttons">
+        <div class="col-xs-3 but" id="seven">7</div>
+        <div class="col-xs-3 but" id="eight">8</div>
+        <div class="col-xs-3 but" id="nine">9</div>
+        <div class="col-xs-3 but" id="mul">x</div>
+      </div>
+      <div class="row buttons">
+        <div class="col-xs-3 but" id="four">4</div>
+        <div class="col-xs-3 but" id="five">5</div>
+        <div class="col-xs-3 but" id="six">6</div>
+        <div class="col-xs-3 but" id="minus">-</div>
+      </div>
+      <div class="row buttons">
+        <div class="col-xs-4 but" id="one">1</div>
+        <div class="col-xs-4 but" id="two">2</div>
+        <div class="col-xs-4 but" id="three">3</div>
+        <div class="col-xs-3 but" id="plus">+</div>
+      </div>
+      <div class="row buttons">
+        <div class="col-xs-4 but" id="plusneg">&plusmn;</div>
+        <div class="col-xs-9 but" id="zero">0</div>
+        <div class="col-xs-3 but" id="dot">.</div>
+        <div class="col-xs-3 but" id="plus">=</div>
+      </div>
     </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- <script src="js\bootstrap.min.js"></script> -->
     <script src="js\calculator.js"></script>
-    
-</body>
+  </body>
 </html>
